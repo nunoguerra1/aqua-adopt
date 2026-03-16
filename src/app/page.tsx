@@ -1,6 +1,6 @@
 import { getAnimals } from "@/services/animals";
 import { AnimalCard } from "@/components/ui/AnimalCard";
-import MapWrapper from "@/components/map/MapWrapper"; // Importação normal aqui
+import MapWrapper from "@/components/map/MapWrapper";
 
 export default async function Home() {
   const animals = await getAnimals();
@@ -23,6 +23,7 @@ export default async function Home() {
           {animals.map((animal) => (
             <AnimalCard
               key={animal.id}
+              id={animal.id}
               name={animal.name}
               species={animal.species}
               image={animal.image}

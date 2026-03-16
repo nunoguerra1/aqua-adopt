@@ -13,3 +13,18 @@ export async function getAnimals() {
         return [];
     }
 }
+
+export async function getAnimalById(id: string) {
+    try {
+        return await prisma.marineAnimal.findUnique({
+            where: { id },
+            include: {
+                updates: {
+                    orderBy: { createdAt: 'desc' }
+                }
+            }
+        });
+    } catch (error) {
+        return null;
+    }
+}
