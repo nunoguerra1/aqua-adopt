@@ -19,9 +19,8 @@ export async function getAnimalById(id: string) {
         return await prisma.marineAnimal.findUnique({
             where: { id },
             include: {
-                updates: {
-                    orderBy: { createdAt: 'desc' }
-                }
+                updates: { orderBy: { createdAt: 'desc' } },
+                adoptions: { orderBy: { createdAt: 'desc' } }
             }
         });
     } catch (error) {

@@ -1,5 +1,7 @@
 import { getAnimalById } from "@/services/animals";
 import { notFound } from "next/navigation";
+import { AdoptionForm } from "@/components/ui/AdoptionForm";
+import { AdoptersList } from "@/components/ui/AdoptersList";
 
 export default async function AnimalDetails({
     params
@@ -24,10 +26,11 @@ export default async function AnimalDetails({
                         Status: {animal.status}
                     </div>
                     <p className="text-gray-700 leading-relaxed">{animal.description}</p>
+                    <div className="mt-8">
+                        <AdoptionForm animalId={animal.id} animalName={animal.name} />
 
-                    <button className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-200">
-                        Apadrinhar {animal.name}
-                    </button>
+                        <AdoptersList adoptions={animal.adoptions} />
+                    </div>
                 </div>
             </div>
 

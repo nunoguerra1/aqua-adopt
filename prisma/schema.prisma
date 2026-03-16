@@ -9,31 +9,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Modelo do Animal Marinho
 model MarineAnimal {
-  id            String         @id @default(cuid())
-  name          String
-  species       String
-  image         String         // URL da foto (Unsplash ou similar)
-  description   String         @db.Text
-  status        Conservation   @default(STABLE)
+  id          String         @id @default(cuid())
+  name        String
+  species     String
+  image       String         // URL da foto
+  description String         @db.Text
+  status      Conservation   @default(STABLE)
   
-  // Coordenadas para o Mapa (Simulação de rastreio)
-  latitude      Float
-  longitude     Float
+  // Coordenadas para o Mapa
+  latitude    Float
+  longitude   Float
   
   // Relações
-  updates       StatusUpdate[] // Histórico de saúde/localização
-  adoptions     Adoption[]     // Quem "apadrinhou" este animal
+  updates     StatusUpdate[] // Histórico de saúde/localização
+  adoptions   Adoption[]     // Quem "apadrinhou" este animal
   
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
 }
 
-// Atualizações de Status (o que o usuário vê no feed)
 model StatusUpdate {
   id        String       @id @default(cuid())
-  title     String       // Ex: "Luna foi vista em Abrolhos!"
+  title     String       
   content   String       @db.Text
   animalId  String
   animal    MarineAnimal @relation(fields: [animalId], references: [id], onDelete: Cascade)
@@ -41,34 +39,19 @@ model StatusUpdate {
   createdAt DateTime     @default(now())
 }
 
-// Tabela de ligação para Adoções (N-N entre User e Animal)
 model Adoption {
-  id        String       @id @default(cuid())
-  userId    String
-  animalId  String
-  user      User         @relation(fields: [userId], references: [id])
-  animal    MarineAnimal @relation(fields: [animalId], references: [id])
+  id            String       @id @default(cuid())
+  adopterName   String
+  adopterEmail  String
+  animalId      String
+  animal        MarineAnimal @relation(fields: [animalId], references: [id])
   
-  startDate DateTime     @default(now())
-
-  @@unique([userId, animalId]) // Garante que um user não adote o mesmo animal duas vezes
+  createdAt     DateTime     @default(now())
 }
 
-// Modelo de Usuário (Simples para começar)
-model User {
-  id        String     @id @default(cuid())
-  name      String?
-  email     String     @unique
-  image     String?    // Foto do perfil
-  adoptions Adoption[]
-  
-  createdAt DateTime   @default(now())
-}
-
-// Categorias de conservação da vida marinha
 enum Conservation {
-  STABLE      // Estável
-  VULNERABLE  // Vulnerável
-  ENDANGERED  // Em Perigo
-  CRITICAL    // Criticamente em Perigo
+  STABLE
+  VULNERABLE
+  ENDANGERED
+  CRITICAL
 }
