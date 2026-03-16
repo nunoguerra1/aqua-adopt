@@ -1,4 +1,6 @@
-import Link from 'next/link';
+'use client'
+import { motion } from "framer-motion"
+import Link from 'next/link'
 
 interface AnimalCardProps {
     id: string;
@@ -10,31 +12,49 @@ interface AnimalCardProps {
 
 export function AnimalCard({ id, name, species, image, status }: AnimalCardProps) {
     return (
-        <div className="border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all bg-white flex flex-col">
-            <img src={image} alt={name} className="w-full h-48 object-cover" />
+        <div className="group relative flex flex-col bg-white rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:shadow-[0_40px_80px_-15px_rgba(15,23,42,0.15)]">
 
-            <div className="p-4 flex-1 flex flex-col">
-                <div className="flex justify-between items-start">
-                    <h3 className="text-xl font-bold text-blue-900">{name}</h3>
-                    <span className="text-xs font-semibold px-2 py-1 rounded bg-blue-100 text-blue-800">
+            <div className="relative h-96 w-full overflow-hidden">
+                <img
+                    src={image}
+                    alt={name}
+                    className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ocean-900/40 to-transparent" />
+
+                <div className="absolute top-6 left-6">
+                    <span className="glass px-4 py-2 rounded-full text-[9px] font-black tracking-[0.2em] uppercase text-ocean-900">
                         {status}
                     </span>
                 </div>
+            </div>
 
-                <p className="text-gray-600 text-sm mt-1 mb-4">{species}</p>
+            <div className="p-10 space-y-8 flex-1 flex flex-col justify-between">
+                <div>
+                    <h3 className="text-4xl font-black text-ocean-900 tracking-tighter leading-none">{name}</h3>
+                    <p className="text-gray-400 mt-3 font-bold tracking-widest uppercase text-[10px]">{species}</p>
+                </div>
 
-                <div className="mt-auto space-y-2">
-                    <Link href={`/animals/${id}`}>
-                        <button className="w-full bg-blue-50 text-blue-600 py-2 rounded-lg font-medium hover:bg-blue-100 transition-colors">
-                            Ver detalhes
-                        </button>
+                <div className="flex flex-col gap-3">
+                    <Link href={`/animal/${id}`}>
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="w-full py-5 rounded-2xl bg-ocean-900 text-white font-bold text-xs tracking-widest uppercase transition-all hover:bg-ocean-800"
+                        >
+                            Conhecer Perfil
+                        </motion.button>
                     </Link>
 
-                    <button className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full py-5 rounded-2xl bg-ocean-50 text-ocean-900 font-bold text-xs tracking-widest uppercase transition-all hover:bg-ocean-100"
+                    >
                         Apadrinhar
-                    </button>
+                    </motion.button>
                 </div>
             </div>
         </div>
-    );
+    )
 }
