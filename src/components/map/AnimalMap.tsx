@@ -1,6 +1,6 @@
 'use client'
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 
@@ -27,16 +27,27 @@ export default function AnimalMap({ animals }: MapProps) {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 />
+
                 {animals.map((animal) => (
                     <Marker
                         key={animal.id}
                         position={[animal.latitude, animal.longitude]}
                         icon={icon}
                     >
+                        <Tooltip
+                            direction="top"
+                            offset={[0, -35]}
+                            opacity={1}
+                            permanent
+                            className="font-bold text-ocean-900 bg-white/90 backdrop-blur-sm border-none shadow-md rounded-lg px-2 py-1 text-xs"
+                        >
+                            {animal.name}
+                        </Tooltip>
+
                         <Popup>
                             <div className="text-center">
-                                <strong className="text-blue-600">{animal.name}</strong><br />
-                                {animal.species}
+                                <strong className="text-blue-600 text-sm">{animal.name}</strong><br />
+                                <span className="text-gray-500 text-xs">{animal.species}</span>
                             </div>
                         </Popup>
                     </Marker>
