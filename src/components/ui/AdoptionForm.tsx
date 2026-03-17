@@ -2,8 +2,15 @@
 
 import { adoptAnimal } from "@/app/actions/adopt"
 import { useState } from "react"
+import { motion } from "framer-motion"
 
-export function AdoptionForm({ animalId, animalName }: { animalId: string, animalName: string }) {
+interface AdoptionFormProps {
+    animalId: string;
+    animalName: string;
+    onClose: () => void;
+}
+
+export function AdoptionForm({ animalId, animalName, onClose }: AdoptionFormProps) {
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
 
@@ -14,6 +21,7 @@ export function AdoptionForm({ animalId, animalName }: { animalId: string, anima
 
         if (result.success) {
             setSuccess(true)
+            setTimeout(onClose, 3000)
         } else {
             alert(result.error)
         }
@@ -21,33 +29,75 @@ export function AdoptionForm({ animalId, animalName }: { animalId: string, anima
 
     if (success) {
         return (
-            <div className="bg-green-100 p-6 rounded-xl text-green-800 text-center font-bold border border-green-200">
-                Apadrinhamento concluido com sucesso! Agora é padrinho/madrinha da {animalName}!
-            </div>
+            <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="bg-green-50 p-8 rounded-3xl text-center border border-green-100 shadow-inner"
+            >
+                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-green-500/30">
+                    <span className="text-white text-2xl">✓</span>
+                </div>
+                <h3 className="text-2xl font-black text-ocean-900 tracking-tighter mb-2">Sucesso!</h3>
+                <p className="text-gray-500 font-medium leading-relaxed">
+                    Você agora é o orgulhoso padrinho/madrinha da <span className="text-ocean-500 font-bold">{animalName}</span>!
+                </p>
+            </motion.div>
         )
     }
 
     return (
-        <form action={handleSubmit} className="bg-blue-50 p-6 rounded-xl shadow-inner space-y-4">
-            <h3 className="text-xl font-bold text-blue-900">Apadrinhar {animalName}</h3>
+        <form action={handleSubmit} className="p-2 space-y-6">
+            <div className="space-y-1">
+                <h3 className="text-3xl font-black text-ocean-900 tracking-tighter">
+                    Apadrinhar <span className="text-ocean-500">{animalName}</span>
+                </h3>
+                <p className="text-sm font-medium text-gray-500">
+                    Seu apoio financia transmissores de telemetria e missões de resgate.
+                </p>
+            </div>
+
             <input type="hidden" name="animalId" value={animalId} />
 
-            <div>
-                <label className="block text-sm font-medium text-blue-800 mb-1">Nome</label>
-                <input name="name" type="text" required className="w-full p-2 rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-500 outline-none" />
+            <div className="space-y-4">
+                <div>
+                    <label className="block text-[10px] font-bold tracking-widest uppercase text-ocean-900 mb-2">Nome Completo</label>
+                    <input
+                        name="name"
+                        type="text"
+                        required
+                        placeholder="Ex: Jacques Cousteau"
+                        className="w-full p-4 rounded-2xl bg-gray-50 border border-gray-100 focus:bg-white focus:border-ocean-500 focus:ring-4 focus:ring-ocean-500/10 outline-none transition-all text-sm font-medium text-ocean-900"
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-[10px] font-bold tracking-widest uppercase text-ocean-900 mb-2">E-mail Profissional</label>
+                    <input
+                        name="email"
+                        type="email"
+                        required
+                        placeholder="contato@instituto.com"
+                        className="w-full p-4 rounded-2xl bg-gray-50 border border-gray-100 focus:bg-white focus:border-ocean-500 focus:ring-4 focus:ring-ocean-500/10 outline-none transition-all text-sm font-medium text-ocean-900"
+                    />
+                </div>
             </div>
 
-            <div>
-                <label className="block text-sm font-medium text-blue-800 mb-1">E-mail</label>
-                <input name="email" type="email" required className="w-full p-2 rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-500 outline-none" />
+            <div className="pt-4 flex gap-3">
+                <button
+                    type="button"
+                    onClick={onClose}
+                    className="px-6 py-4 rounded-2xl bg-gray-100 text-gray-500 font-bold text-xs tracking-widest uppercase hover:bg-gray-200 transition-colors"
+                >
+                    Cancelar
+                </button>
+                <button
+                    type="submit"
+                    disabled={loading}
+                    className="flex-1 bg-ocean-900 text-white py-4 rounded-2xl font-bold text-xs tracking-widest uppercase hover:bg-ocean-800 transition-all disabled:bg-gray-300 disabled:cursor-not-allowed shadow-lg shadow-ocean-900/20"
+                >
+                    {loading ? 'Processando dados...' : 'Confirmar Apoio'}
+                </button>
             </div>
-
-            <button
-                disabled={loading}
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors disabled:bg-gray-400"
-            >
-                {loading ? 'A processar...' : 'Confirmar Apadrinhamento'}
-            </button>
         </form>
     )
 }
