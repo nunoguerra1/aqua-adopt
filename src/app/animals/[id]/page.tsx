@@ -118,7 +118,7 @@ export default async function AnimalDetails({
 
                         <FadeIn delay={0.4}>
                             <div className="bg-white rounded-[3rem] p-8 shadow-2xl shadow-ocean-900/10 border border-gray-50">
-                                <AdoptionForm animalId={animal.id} animalName={animal.name} onClose={() => { }} />
+                                <AdoptionForm animalId={animal.id} animalName={animal.name} />
                             </div>
                         </FadeIn>
 

@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 interface AdoptionFormProps {
     animalId: string;
     animalName: string;
-    onClose: () => void;
+    onClose?: () => void;
 }
 
 export function AdoptionForm({ animalId, animalName, onClose }: AdoptionFormProps) {
@@ -21,7 +21,9 @@ export function AdoptionForm({ animalId, animalName, onClose }: AdoptionFormProp
 
         if (result.success) {
             setSuccess(true)
-            setTimeout(onClose, 3000)
+            if (onClose) {
+                setTimeout(onClose, 3000)
+            }
         } else {
             alert(result.error)
         }
@@ -83,13 +85,15 @@ export function AdoptionForm({ animalId, animalName, onClose }: AdoptionFormProp
             </div>
 
             <div className="pt-4 flex gap-3">
-                <button
-                    type="button"
-                    onClick={onClose}
-                    className="px-6 py-4 rounded-2xl bg-gray-100 text-gray-500 font-bold text-xs tracking-widest uppercase hover:bg-gray-200 transition-colors"
-                >
-                    Cancelar
-                </button>
+                {onClose && (
+                    <button
+                        type="button"
+                        onClick={onClose}
+                        className="px-6 py-4 rounded-2xl bg-gray-100 text-gray-500 font-bold text-xs tracking-widest uppercase hover:bg-gray-200 transition-colors"
+                    >
+                        Cancelar
+                    </button>
+                )}
                 <button
                     type="submit"
                     disabled={loading}
