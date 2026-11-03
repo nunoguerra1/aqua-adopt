@@ -31,17 +31,29 @@ export default function ReportarPage() {
                         Cidadão <span className="text-accent">Cientista</span>
                     </h1>
                     <p className="text-gray-500 text-lg">
-                        Viu um animal marinho encalhado ou em situação de risco? Envie os dados para nossa rede de resgate.
+                        Registre um avistamento de demonstração do Aqua Adopt.
+                    </p>
+                </div>
+
+                <div
+                    role="alert"
+                    className="mb-8 rounded-2xl border border-amber-300 bg-amber-50 p-6 text-amber-900"
+                >
+                    <p className="font-bold mb-1">Viu um animal marinho ferido ou encalhado?</p>
+                    <p className="text-sm">
+                        Este formulário é uma demonstração e <strong>não envia o relato a ninguém</strong>.
+                        Procure agora os órgãos ambientais ou o projeto de monitoramento de praias da sua região.
                     </p>
                 </div>
 
                 <div className="glass p-8 md:p-12 rounded-[3rem] shadow-2xl shadow-ocean-900/10">
                     {isSuccess ? (
                         <div className="text-center py-12 flex flex-col items-center animate-in fade-in zoom-in duration-500">
-                            <CheckCircle2 className="w-20 h-20 text-green-500 mb-6" />
-                            <h2 className="text-3xl font-black text-ocean-900 mb-2">Relato Enviado!</h2>
+                            <CheckCircle2 className="w-20 h-20 text-ocean-600 mb-6" />
+                            <h2 className="text-3xl font-black text-ocean-900 mb-2">Demonstração concluída</h2>
                             <p className="text-gray-500 mb-8 max-w-md">
-                                Nossa equipe de biólogos parceiros foi notificada e avaliará a situação imediatamente. Muito obrigado por ajudar a proteger a vida marinha!
+                                Nada foi enviado: esta página é uma demonstração e nenhuma equipe foi notificada.
+                                Se o animal precisa de ajuda, procure os órgãos ambientais da sua região.
                             </p>
                             <Link
                                 href="/"
@@ -107,7 +119,7 @@ export default function ReportarPage() {
                                     <span className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin" />
                                 ) : (
                                     <>
-                                        <Send className="w-5 h-5" /> Enviar Relato de Emergência
+                                        <Send className="w-5 h-5" /> Enviar relato de demonstração
                                     </>
                                 )}
                             </button>
