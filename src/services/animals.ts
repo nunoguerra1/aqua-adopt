@@ -9,8 +9,8 @@ export async function getAnimals() {
     })
     return animals
   } catch (error) {
-    console.error(`Erro ao buscar o animal ${id}:`, error)
-    return null
+    console.error('Erro ao buscar animais:', error)
+    return []
   }
 }
 
@@ -24,6 +24,7 @@ export async function getAnimalById(id: string) {
       },
     })
   } catch (error) {
+    console.error(`Erro ao buscar o animal ${id}:`, error)
     return null
   }
 }
