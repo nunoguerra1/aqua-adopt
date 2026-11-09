@@ -1,30 +1,30 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
-import { Background3D } from "@/components/layout/Background3D";
-import { Footer } from "@/components/layout/Footer";
-import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import type { Metadata } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
+import './globals.css'
+import { Navbar } from '@/components/layout/Navbar'
+import { Background3D } from '@/components/layout/Background3D'
+import { Footer } from '@/components/layout/Footer'
+import { ScrollToTop } from '@/components/ui/ScrollToTop'
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+})
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
-  title: "AquaAdopt | Ocean Telemetry",
-  description: "Monitoramento e preservação da biodiversidade marinha em tempo real.",
-};
+  title: 'AquaAdopt | Ocean Telemetry',
+  description: 'Monitoramento e preservação da biodiversidade marinha em tempo real.',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="pt-br" className="scroll-smooth">
@@ -36,12 +36,10 @@ export default function RootLayout({
         <Navbar />
         <ScrollToTop />
 
-        <main className="pt-20 flex-1">
-          {children}
-        </main>
+        <main className="pt-20 flex-1">{children}</main>
 
         <Footer />
       </body>
     </html>
-  );
+  )
 }

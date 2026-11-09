@@ -70,13 +70,13 @@ documentação.
 O planejamento completo, com esforço e dependências de cada item, está em
 [`docs/FEATURES.md`](docs/FEATURES.md).
 
-| Fase | Foco |
-|---|---|
-| 0 | Fundação e honestidade: documentação, banco e migrations, qualidade mínima, i18n |
-| 1 | Núcleo funcional: avistamentos reais com moderação, autenticação, painel admin |
-| 2 | Dados e telemetria: trajetórias, mapa v2, dados abertos (OBIS, GBIF, NOAA, MERMAID), API pública |
-| 3 | Experiência cinematográfica: oceano 3D, scroll storytelling, conteúdo educativo |
-| 4 | Open source de verdade: testes, observabilidade, segurança, comunidade |
+| Fase | Foco                                                                                             |
+| ---- | ------------------------------------------------------------------------------------------------ |
+| 0    | Fundação e honestidade: documentação, banco e migrations, qualidade mínima, i18n                 |
+| 1    | Núcleo funcional: avistamentos reais com moderação, autenticação, painel admin                   |
+| 2    | Dados e telemetria: trajetórias, mapa v2, dados abertos (OBIS, GBIF, NOAA, MERMAID), API pública |
+| 3    | Experiência cinematográfica: oceano 3D, scroll storytelling, conteúdo educativo                  |
+| 4    | Open source de verdade: testes, observabilidade, segurança, comunidade                           |
 
 ## ⚙️ Como rodar localmente
 
@@ -107,25 +107,25 @@ compartilham dados.
 
 ### Variáveis de ambiente
 
-| Variável | Uso | Local | Produção (Neon) |
-|---|---|---|---|
-| `DATABASE_URL` | Conexão do app (Prisma Client) | Postgres do Docker | URL **pooled** (host com `-pooler`) |
-| `DIRECT_URL` | Conexão do Prisma CLI (migrations) | Postgres do Docker | URL **direta** (host sem `-pooler`) |
+| Variável       | Uso                                | Local              | Produção (Neon)                     |
+| -------------- | ---------------------------------- | ------------------ | ----------------------------------- |
+| `DATABASE_URL` | Conexão do app (Prisma Client)     | Postgres do Docker | URL **pooled** (host com `-pooler`) |
+| `DIRECT_URL`   | Conexão do Prisma CLI (migrations) | Postgres do Docker | URL **direta** (host sem `-pooler`) |
 
 A URL de produção fica **somente** nas variáveis de ambiente da Vercel.
 Nunca coloque credenciais de produção na `.env` local nem em commits.
 
 ### Scripts
 
-| Comando | O que faz |
-|---|---|
-| `npm run db:up` | Sobe o Postgres local (Docker) |
-| `npm run db:down` | Para o Postgres, mantendo os dados |
+| Comando              | O que faz                                                |
+| -------------------- | -------------------------------------------------------- |
+| `npm run db:up`      | Sobe o Postgres local (Docker)                           |
+| `npm run db:down`    | Para o Postgres, mantendo os dados                       |
 | `npm run db:migrate` | Cria e aplica uma migration após mudar o `schema.prisma` |
-| `npm run db:deploy` | Aplica migrations pendentes (uso em produção) |
-| `npm run db:seed` | Insere os animais de exemplo (idempotente) |
-| `npm run db:reset` | Apaga o banco local, reaplica migrations e roda o seed |
-| `npm run db:studio` | Abre o Prisma Studio |
+| `npm run db:deploy`  | Aplica migrations pendentes (uso em produção)            |
+| `npm run db:seed`    | Insere os animais de exemplo (idempotente)               |
+| `npm run db:reset`   | Apaga o banco local, reaplica migrations e roda o seed   |
+| `npm run db:studio`  | Abre o Prisma Studio                                     |
 
 ### Alterando o schema
 
@@ -139,7 +139,7 @@ Nunca coloque credenciais de produção na `.env` local nem em commits.
 Migrations **não** rodam automaticamente no deploy. Isso é intencional: uma
 migration que falha no meio de um deploy deixaria o site fora do ar.
 
-1. Crie uma *branch* de backup do banco no painel do Neon.
+1. Crie uma _branch_ de backup do banco no painel do Neon.
 2. Exporte `DATABASE_URL` e `DIRECT_URL` apontando para produção **apenas na
    sessão atual do terminal**.
 3. Rode `npm run db:deploy`.
