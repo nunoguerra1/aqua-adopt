@@ -1,6 +1,7 @@
 'use client'
 
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet'
+import type { MapAnimal } from './types'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 
@@ -12,7 +13,7 @@ const icon = L.icon({
 })
 
 interface MapProps {
-  animals: any[]
+  animals: MapAnimal[]
 }
 
 export default function AnimalMap({ animals }: MapProps) {

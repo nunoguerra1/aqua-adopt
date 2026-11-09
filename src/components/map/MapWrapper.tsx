@@ -1,6 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import type { MapAnimal } from './types'
 
 const AnimalMap = dynamic(() => import('./AnimalMap'), {
   ssr: false,
@@ -11,6 +12,6 @@ const AnimalMap = dynamic(() => import('./AnimalMap'), {
   ),
 })
 
-export default function MapWrapper({ animals }: { animals: any[] }) {
+export default function MapWrapper({ animals }: { animals: MapAnimal[] }) {
   return <AnimalMap animals={animals} />
 }

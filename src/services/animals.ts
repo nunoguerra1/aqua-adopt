@@ -9,8 +9,8 @@ export async function getAnimals() {
     })
     return animals
   } catch (error) {
-    console.error('Erro ao buscar animais:', error)
-    return []
+    console.error(`Erro ao buscar o animal ${id}:`, error)
+    return null
   }
 }
 
