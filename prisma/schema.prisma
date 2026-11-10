@@ -56,3 +56,35 @@ enum Conservation {
   ENDANGERED
   CRITICAL
 }
+
+enum SightingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum SpeciesGroup {
+  TURTLE
+  CETACEAN
+  PINNIPED
+  SEABIRD
+  OTHER
+  UNKNOWN
+}
+
+model Sighting {
+  id           String         @id @default(cuid())
+  reporterName String?
+  speciesGroup SpeciesGroup   @default(UNKNOWN)
+  placeText    String?
+  latitude     Float
+  longitude    Float
+  description  String         @db.Text
+  observedAt   DateTime       @default(now())
+  status       SightingStatus @default(PENDING)
+
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@index([status, createdAt])
+}
