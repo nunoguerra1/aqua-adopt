@@ -11,7 +11,10 @@ export async function getAnimalById(id: string) {
     where: { id },
     include: {
       updates: { orderBy: { createdAt: 'desc' } },
-      adoptions: { orderBy: { createdAt: 'desc' } },
+      adoptions: {
+        select: { id: true, adopterName: true, createdAt: true },
+        orderBy: { createdAt: 'desc' },
+      },
     },
   })
 }
