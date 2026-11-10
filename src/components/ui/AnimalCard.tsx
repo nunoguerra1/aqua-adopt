@@ -3,13 +3,15 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { AdoptionForm } from '@/components/ui/AdoptionForm'
+import type { Conservation } from '@prisma/client'
+import { STATUS_INFO } from '@/lib/status'
 
 interface AnimalCardProps {
   id: string
   name: string
   species: string
   image: string
-  status: string
+  status: Conservation
 }
 
 export function AnimalCard({ id, name, species, image, status }: AnimalCardProps) {
@@ -28,7 +30,7 @@ export function AnimalCard({ id, name, species, image, status }: AnimalCardProps
 
           <div className="absolute top-6 left-6">
             <span className="glass px-4 py-2 rounded-full text-[9px] font-black tracking-[0.2em] uppercase text-ocean-900">
-              {status}
+              {STATUS_INFO[status].label}
             </span>
           </div>
         </div>

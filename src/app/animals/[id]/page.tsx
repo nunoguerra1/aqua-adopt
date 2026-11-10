@@ -4,6 +4,7 @@ import { AdoptionForm } from '@/components/ui/AdoptionForm'
 import { AdoptersList } from '@/components/ui/AdoptersList'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { formatCoordinates } from '@/lib/coordinates'
+import { STATUS_INFO } from '@/lib/status'
 import Link from 'next/link'
 
 export default async function AnimalDetails({ params }: { params: Promise<{ id: string }> }) {
@@ -11,13 +12,6 @@ export default async function AnimalDetails({ params }: { params: Promise<{ id: 
   const animal = await getAnimalById(id)
 
   if (!animal) notFound()
-
-  const getStatusColor = (status: string) => {
-    if (status.toLowerCase().includes('crítico')) return 'text-accent bg-accent/10 border-accent/20'
-    if (status.toLowerCase().includes('vulnerável'))
-      return 'text-orange-500 bg-orange-500/10 border-orange-500/20'
-    return 'text-ocean-500 bg-ocean-500/10 border-ocean-500/20'
-  }
 
   return (
     <main className="min-h-screen pb-24">
@@ -39,9 +33,9 @@ export default async function AnimalDetails({ params }: { params: Promise<{ id: 
             </Link>
             <div className="flex flex-wrap items-center gap-4 mb-4">
               <span
-                className={`px-4 py-2 rounded-full text-[10px] font-black tracking-[0.2em] uppercase border backdrop-blur-md ${getStatusColor(animal.status)}`}
+                className={`px-4 py-2 rounded-full text-[10px] font-black tracking-[0.2em] uppercase border backdrop-blur-md ${STATUS_INFO[animal.status].classes}`}
               >
-                Status: {animal.status}
+                Status: {STATUS_INFO[animal.status].label}
               </span>
               <span className="glass px-4 py-2 rounded-full text-[10px] font-black tracking-[0.2em] uppercase text-white border-white/20">
                 Dados de demonstração
