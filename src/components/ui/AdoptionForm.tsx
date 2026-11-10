@@ -55,7 +55,8 @@ export function AdoptionForm({ animalId, animalName, onClose }: AdoptionFormProp
           Apadrinhar <span className="text-ocean-500">{animalName}</span>
         </h3>
         <p className="text-sm font-medium text-gray-500">
-          Seu apoio financia transmissores de telemetria e missões de resgate.
+          Apadrinhamento simbólico, sem custo e sem pagamento. Seu nome aparece no mural do animal;
+          seu e-mail não é exibido.
         </p>
       </div>
 
@@ -77,13 +78,13 @@ export function AdoptionForm({ animalId, animalName, onClose }: AdoptionFormProp
 
         <div>
           <label className="block text-[10px] font-bold tracking-widest uppercase text-ocean-900 mb-2">
-            E-mail Profissional
+            E-mail
           </label>
           <input
             name="email"
             type="email"
             required
-            placeholder="contato@instituto.com"
+            placeholder="voce@exemplo.com"
             className="w-full p-4 rounded-2xl bg-gray-50 border border-gray-100 focus:bg-white focus:border-ocean-500 focus:ring-4 focus:ring-ocean-500/10 outline-none transition-all text-sm font-medium text-ocean-900"
           />
         </div>

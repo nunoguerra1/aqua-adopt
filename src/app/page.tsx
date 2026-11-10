@@ -22,19 +22,19 @@ export default async function Home() {
           <div className="flex justify-between items-center mb-8 p-8">
             <div>
               <h2 className="text-3xl font-black text-ocean-900 tracking-tight">
-                Vigilância Ativa
+                Mapa dos Animais
               </h2>
               <p className="text-gray-400 font-medium">
-                Dados de telemetria atualizados em tempo real.
+                Posições de demonstração dos animais cadastrados.
               </p>
             </div>
             <div className="hidden md:block">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <span className="w-2 h-2 bg-amber-500 rounded-full" />
                 <span
                   className={`text-[10px] font-black uppercase tracking-[0.2em] text-ocean-900`}
                 >
-                  Live Satellite Feed
+                  Dados de demonstração
                 </span>
               </div>
             </div>
@@ -50,12 +50,9 @@ export default async function Home() {
           <div>
             <h2 className="text-5xl font-black text-ocean-900 tracking-tighter">Sentinelas</h2>
             <p className="text-gray-500 text-lg mt-2">
-              Espécies vitais sob monitoramento constante.
+              Espécies marinhas ameaçadas que você pode conhecer e apadrinhar.
             </p>
           </div>
-          <button className="text-ocean-500 font-bold text-xs tracking-widest uppercase border-b-2 border-ocean-500/20 hover:border-ocean-500 transition-all pb-1">
-            Explorar Todos os Registros
-          </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -84,8 +81,8 @@ export default async function Home() {
             </h3>
             <p className="text-lg text-gray-600 font-medium leading-relaxed">
               O AquaAdopt nasceu com um propósito claro: conscientizar e engajar a sociedade na
-              preservação dos oceanos. Utilizamos tecnologia de telemetria para criar uma ponte
-              direta entre você e as espécies mais vulneráveis do planeta.
+              preservação dos oceanos. Queremos usar dados abertos e tecnologia para criar uma ponte
+              entre você e as espécies mais vulneráveis do planeta.
             </p>
           </div>
         </FadeIn>
@@ -97,11 +94,12 @@ export default async function Home() {
                 <Satellite className="w-7 h-7 text-ocean-600" strokeWidth={2.5} />
               </div>
               <h4 className="text-xl font-black text-ocean-900 tracking-tighter mb-3">
-                Monitoramento Real
+                Acompanhe os Animais
               </h4>
               <p className="text-gray-500 font-medium leading-relaxed">
-                Acompanhe a trajetória de animais resgatados e devolvidos ao mar, entendendo seus
-                hábitos e rotas migratórias com dados atualizados.
+                Veja onde cada animal está no mapa e leia o diário de bordo de cada um. Nesta
+                demonstração as posições são fictícias; a próxima etapa é conectar dados científicos
+                abertos.
               </p>
             </div>
           </FadeIn>
@@ -115,8 +113,8 @@ export default async function Home() {
                 Apadrinhamento
               </h4>
               <p className="text-gray-500 font-medium leading-relaxed">
-                Sua doação ajuda a financiar novos transmissores GPS e a custear missões de resgate
-                de institutos parceiros ao redor do mundo.
+                O apadrinhamento é simbólico: você escolhe um animal e seu nome entra no mural de
+                padrinhos. Nenhum pagamento é processado.
               </p>
             </div>
           </FadeIn>
@@ -130,8 +128,8 @@ export default async function Home() {
                 Conscientização
               </h4>
               <p className="text-gray-500 font-medium leading-relaxed">
-                Transformamos dados científicos complexos em uma experiência visual imersiva para
-                educar novas gerações sobre a vida marinha.
+                Transformamos informação sobre a vida marinha em uma experiência visual para educar
+                novas gerações.
               </p>
             </div>
           </FadeIn>

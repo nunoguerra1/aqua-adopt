@@ -81,7 +81,7 @@ export default async function AnimalDetails({ params }: { params: Promise<{ id: 
           <FadeIn delay={0.2}>
             <h2 className="text-3xl font-black text-ocean-900 tracking-tighter mb-6 flex items-center gap-3">
               <span className="w-2 h-8 bg-ocean-500 rounded-full inline-block"></span>
-              Dossiê Científico
+              Sobre {animal.name}
             </h2>
             <div className="prose prose-lg prose-blue max-w-none text-gray-600 leading-relaxed font-medium">
               <p>{animal.description}</p>
