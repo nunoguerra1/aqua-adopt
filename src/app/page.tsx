@@ -5,6 +5,8 @@ import { HeroSection } from '@/components/sections/HeroSection'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { Satellite, Heart, Waves } from 'lucide-react'
 
+export const revalidate = 60
+
 export default async function Home() {
   const animals = await getAnimals()
 
