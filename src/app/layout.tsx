@@ -5,6 +5,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Background3D } from '@/components/layout/Background3D'
 import { Footer } from '@/components/layout/Footer'
 import { ScrollToTop } from '@/components/ui/ScrollToTop'
+import { DemoBanner } from '@/components/layout/DemoBanner'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -17,8 +18,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'AquaAdopt | Ocean Telemetry',
-  description: 'Monitoramento e preservação da biodiversidade marinha em tempo real.',
+  title: 'AquaAdopt | Conservação Marinha',
+  description:
+    'Projeto de código aberto para conhecer e apadrinhar simbolicamente animais marinhos. Demonstração com dados fictícios.',
 }
 
 export default function RootLayout({
@@ -36,7 +38,10 @@ export default function RootLayout({
         <Navbar />
         <ScrollToTop />
 
-        <main className="pt-20 flex-1">{children}</main>
+        <div className="pt-20 flex-1">
+          <DemoBanner />
+          {children}
+        </div>
 
         <Footer />
       </body>

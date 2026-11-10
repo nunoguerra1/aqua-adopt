@@ -15,6 +15,7 @@ for (const { path, nome } of routes) {
 
     expect(resposta?.status()).toBe(200)
     await expect(page.locator('body')).toBeVisible()
+    await expect(page.getByRole('note')).toContainText('Projeto de demonstração')
     expect(erros).toEqual([])
   })
 }
