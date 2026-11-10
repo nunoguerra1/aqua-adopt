@@ -21,7 +21,7 @@ export async function adoptAnimal(formData: FormData) {
       },
     })
 
-    revalidatePath(`/animal/${animalId}`)
+    revalidatePath(`/animals/${animalId}`)
 
     return { success: true }
   } catch (error) {
