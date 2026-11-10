@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { AdoptionForm } from '@/components/ui/AdoptionForm'
 import { AdoptersList } from '@/components/ui/AdoptersList'
 import { FadeIn } from '@/components/ui/FadeIn'
+import { formatCoordinates } from '@/lib/coordinates'
 import Link from 'next/link'
 
 export default async function AnimalDetails({ params }: { params: Promise<{ id: string }> }) {
@@ -43,7 +44,7 @@ export default async function AnimalDetails({ params }: { params: Promise<{ id: 
                 Status: {animal.status}
               </span>
               <span className="glass px-4 py-2 rounded-full text-[10px] font-black tracking-[0.2em] uppercase text-white border-white/20">
-                Sinal Ativo
+                Dados de demonstração
               </span>
             </div>
             <h1 className="text-6xl md:text-8xl font-black text-white tracking-tighter leading-none mb-2">
@@ -62,21 +63,23 @@ export default async function AnimalDetails({ params }: { params: Promise<{ id: 
             <div className="glass rounded-3xl p-6 grid grid-cols-3 gap-4 border-ocean-900/5 shadow-xl">
               <div>
                 <p className="text-[10px] font-bold tracking-widest uppercase text-gray-400">
-                  Última Posição
+                  Posição registrada
                 </p>
-                <p className="text-lg font-black text-ocean-900 mt-1">Pacífico Sul</p>
+                <p className="text-lg font-black text-ocean-900 mt-1">
+                  {formatCoordinates(animal.latitude, animal.longitude)}
+                </p>
               </div>
               <div className="border-l border-ocean-900/10 pl-4">
                 <p className="text-[10px] font-bold tracking-widest uppercase text-gray-400">
-                  Profundidade
+                  Atualizações
                 </p>
-                <p className="text-lg font-black text-ocean-900 mt-1">45m</p>
+                <p className="text-lg font-black text-ocean-900 mt-1">{animal.updates.length}</p>
               </div>
               <div className="border-l border-ocean-900/10 pl-4">
                 <p className="text-[10px] font-bold tracking-widest uppercase text-gray-400">
-                  Temperatura
+                  Padrinhos
                 </p>
-                <p className="text-lg font-black text-ocean-900 mt-1">22°C</p>
+                <p className="text-lg font-black text-ocean-900 mt-1">{animal.adoptions.length}</p>
               </div>
             </div>
           </FadeIn>
