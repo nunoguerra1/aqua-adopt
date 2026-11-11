@@ -2,15 +2,7 @@
 
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet'
 import type { MapAnimal } from './types'
-import 'leaflet/dist/leaflet.css'
-import L from 'leaflet'
-
-const icon = L.icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-})
+import { markerIcon } from './marker-icon'
 
 interface MapProps {
   animals: MapAnimal[]
@@ -26,7 +18,7 @@ export default function AnimalMap({ animals }: MapProps) {
         />
 
         {animals.map((animal) => (
-          <Marker key={animal.id} position={[animal.latitude, animal.longitude]} icon={icon}>
+          <Marker key={animal.id} position={[animal.latitude, animal.longitude]} icon={markerIcon}>
             <Tooltip
               direction="top"
               offset={[0, -35]}

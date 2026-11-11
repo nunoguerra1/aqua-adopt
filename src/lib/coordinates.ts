@@ -20,3 +20,13 @@ export function toPublicCoordinates(latitude: number, longitude: number) {
     longitude: roundCoordinate(longitude),
   }
 }
+
+export function parseCoordinate(value: string, min: number, max: number): number | null {
+  const normalized = value.trim().replace(',', '.')
+  if (normalized === '') return null
+
+  const number = Number(normalized)
+  if (!Number.isFinite(number) || number < min || number > max) return null
+
+  return number
+}

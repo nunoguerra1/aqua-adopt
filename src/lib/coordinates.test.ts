@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { formatCoordinates, roundCoordinate, toPublicCoordinates } from './coordinates'
+import {
+  formatCoordinates,
+  parseCoordinate,
+  roundCoordinate,
+  toPublicCoordinates,
+} from './coordinates'
 
 describe('formatCoordinates', () => {
   it('usa S e O no hemisfério sul e oeste', () => {
@@ -36,5 +41,18 @@ describe('toPublicCoordinates', () => {
       latitude: -24,
       longitude: -45.4,
     })
+  })
+})
+
+describe('parseCoordinate', () => {
+  it('aceita ponto ou vírgula como separador decimal', () => {
+    expect(parseCoordinate('-24.1', -90, 90)).toBe(-24.1)
+    expect(parseCoordinate('-24,1', -90, 90)).toBe(-24.1)
+  })
+
+  it('devolve null para vazio, texto e valores fora do intervalo', () => {
+    expect(parseCoordinate('', -90, 90)).toBeNull()
+    expect(parseCoordinate('abc', -90, 90)).toBeNull()
+    expect(parseCoordinate('91', -90, 90)).toBeNull()
   })
 })

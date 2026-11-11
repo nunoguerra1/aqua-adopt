@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { CheckCircle2, LocateFixed, MapPin, Send } from 'lucide-react'
 import { submitSighting, type SightingFormState } from '@/app/actions/sightings'
 import { SPECIES_GROUP_LABELS } from '@/lib/sightings/labels'
+import { LocationPickerWrapper } from '@/components/sightings/LocationPickerWrapper'
+import { parseCoordinate } from '@/lib/coordinates'
 
 const inputClass =
   'w-full bg-white/50 border border-gray-200 rounded-2xl px-6 py-4 outline-none focus:border-ocean-500 focus:ring-2 focus:ring-ocean-500/20 transition-all'
@@ -30,6 +32,9 @@ function SightingFormFields({ onReset }: { onReset: () => void }) {
   const errors = state.fieldErrors ?? {}
   const values = state.values ?? {}
   const locationError = errors.latitude ?? errors.longitude
+
+  const markerLat = parseCoordinate(coords.lat, -90, 90)
+  const markerLng = parseCoordinate(coords.lng, -180, 180)
 
   function handleUseMyLocation() {
     if (!navigator.geolocation) {
@@ -146,6 +151,17 @@ function SightingFormFields({ onReset }: { onReset: () => void }) {
             Não consegui obter sua localização. Digite as coordenadas abaixo.
           </p>
         )}
+
+        <p className="text-sm font-medium text-gray-500 ml-2">
+          Clique no mapa para marcar o local, ou digite as coordenadas abaixo.
+        </p>
+        <LocationPickerWrapper
+          latitude={markerLat}
+          longitude={markerLng}
+          onPick={(latitude, longitude) =>
+            setCoords({ lat: latitude.toFixed(5), lng: longitude.toFixed(5) })
+          }
+        />
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
