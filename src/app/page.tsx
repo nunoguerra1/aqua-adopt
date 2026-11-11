@@ -1,4 +1,5 @@
 import { getAnimals } from '@/services/animals'
+import { getPublicSightings } from '@/services/sightings'
 import { AnimalCard } from '@/components/ui/AnimalCard'
 import MapWrapper from '@/components/map/MapWrapper'
 import { HeroSection } from '@/components/sections/HeroSection'
@@ -8,7 +9,7 @@ import { Satellite, Heart, Waves } from 'lucide-react'
 export const revalidate = 60
 
 export default async function Home() {
-  const animals = await getAnimals()
+  const [animals, sightings] = await Promise.all([getAnimals(), getPublicSightings()])
 
   return (
     <main className="max-w-[1400px] mx-auto px-6 py-16 md:py-24 space-y-32">
@@ -25,22 +26,21 @@ export default async function Home() {
                 Mapa dos Animais
               </h2>
               <p className="text-gray-400 font-medium">
-                Posições de demonstração dos animais cadastrados.
+                Marcadores: animais de demonstração. Círculos: relatos de usuários já revisados, com
+                posição aproximada.
               </p>
             </div>
             <div className="hidden md:block">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-amber-500 rounded-full" />
-                <span
-                  className={`text-[10px] font-black uppercase tracking-[0.2em] text-ocean-900`}
-                >
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-ocean-900">
                   Dados de demonstração
                 </span>
               </div>
             </div>
           </div>
           <div className="h-[600px] rounded-[2.5rem] overflow-hidden grayscale-[0.3] hover:grayscale-0 transition-all duration-700 shadow-inner">
-            <MapWrapper animals={animals} />
+            <MapWrapper animals={animals} sightings={sightings} />
           </div>
         </section>
       </FadeIn>
