@@ -20,6 +20,11 @@ describe('parseSighting', () => {
     }
   })
 
+  it('aceita vírgula como separador decimal', () => {
+    const resultado = parseSighting({ ...valido, latitude: '-23,8' })
+    expect(resultado.ok && resultado.data.latitude).toBe(-23.8)
+  })
+
   it('trata nome e local vazios como ausentes', () => {
     const resultado = parseSighting({ ...valido, reporterName: '', placeText: '  ' })
     expect(resultado.ok).toBe(true)

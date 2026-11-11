@@ -18,7 +18,12 @@ const optionalText = (max: number) =>
     .optional()
 
 const coordinate = (min: number, max: number) =>
-  z.string().trim().min(1).pipe(z.coerce.number().min(min).max(max))
+  z
+    .string()
+    .trim()
+    .min(1)
+    .transform((value) => Number(value.replace(',', '.')))
+    .refine((val) => !isNaN(val) && val >= min && val <= max)
 
 export const sightingSchema = z.object({
   reporterName: optionalText(80),
