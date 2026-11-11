@@ -31,6 +31,8 @@ jobs:
     env:
       DATABASE_URL: postgresql://aqua:aqua@localhost:5432/aqua_adopt
       DIRECT_URL: postgresql://aqua:aqua@localhost:5432/aqua_adopt
+      BETTER_AUTH_SECRET: ci-only-secret-not-used-for-anything-real-0123456789
+      BETTER_AUTH_URL: http://localhost:3000
 
     steps:
       - uses: actions/checkout@v4
