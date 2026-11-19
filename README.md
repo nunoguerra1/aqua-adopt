@@ -163,6 +163,44 @@ que não seja local. Para forçar (por sua conta e risco), use
 - **Drift detectado no `migrate dev`:** o banco local foi alterado fora das
   migrations. Rode `npm run db:reset`.
 
+## 🔐 Autenticação e administração
+
+O login é **sem senha**: a pessoa informa o e-mail e recebe um link de acesso
+que vale por 5 minutos e só funciona uma vez ([Better Auth](https://better-auth.com)
+com o plugin de link mágico).
+
+### Variáveis de ambiente
+
+| Variável                                                             | Uso                                                                       |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `BETTER_AUTH_SECRET`                                                 | Segredo aleatório de 32+ caracteres (um valor diferente em cada ambiente) |
+| `BETTER_AUTH_URL`                                                    | URL pública do site (`http://localhost:3000` em desenvolvimento)          |
+| `ADMIN_EMAILS`                                                       | E-mails (separados por vírgula) que viram `ADMIN` ao criar a conta        |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `EMAIL_FROM` | Envio dos e-mails (Gmail com senha de app, Brevo, Resend...)              |
+
+Em desenvolvimento, sem `SMTP_HOST`, o link de acesso aparece **no terminal**.
+Em produção, sem SMTP configurado, o envio falha de propósito.
+
+### Papéis
+
+- `USER`: qualquer pessoa que entrou com o e-mail.
+- `ADMIN`: acessa `/admin`. O papel é definido **só no servidor**, na criação da
+  conta, pela lista `ADMIN_EMAILS`. Para promover alguém depois, altere a coluna
+  `role` da tabela `user` no Prisma Studio.
+
+### Regra de segurança
+
+Toda página e toda Server Action de `/admin` deve começar com `requireAdmin()`
+(`src/lib/auth/session.ts`). Quem está logado, mas não é admin, recebe 404.
+
+### Limitações conhecidas
+
+- Os _preview deployments_ da Vercel não conseguem fazer login (só a URL de
+  produção e o `localhost` são confiáveis).
+- O limite de tentativas do login é mantido em memória, que na Vercel não é
+  compartilhada entre instâncias. A proteção completa (Turnstile e limite
+  persistente) está prevista na Parte 2 do F1.1.
+
 ## 🤝 Contribuindo
 
 Contribuições são bem-vindas. Veja o [roadmap](docs/FEATURES.md) para
