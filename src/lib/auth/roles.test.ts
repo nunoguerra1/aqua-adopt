@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isAdminEmail, parseAdminEmails } from './roles'
+import { isAdminEmail, isAdminRole, parseAdminEmails } from './roles'
 
 describe('parseAdminEmails', () => {
   it('separa por vírgula, ignora espaços e normaliza maiúsculas', () => {
@@ -30,5 +30,15 @@ describe('isAdminEmail', () => {
 
   it('ninguém é admin quando a lista está vazia', () => {
     expect(isAdminEmail('ana@exemplo.com', undefined)).toBe(false)
+  })
+})
+
+describe('isAdminRole', () => {
+  it('só aceita exatamente ADMIN', () => {
+    expect(isAdminRole('ADMIN')).toBe(true)
+    expect(isAdminRole('admin')).toBe(false)
+    expect(isAdminRole('USER')).toBe(false)
+    expect(isAdminRole(undefined)).toBe(false)
+    expect(isAdminRole(null)).toBe(false)
   })
 })

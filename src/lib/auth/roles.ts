@@ -10,3 +10,7 @@ export function parseAdminEmails(value: string | undefined): string[] {
 export function isAdminEmail(email: string, adminEmails: string | undefined): boolean {
   return parseAdminEmails(adminEmails).includes(email.trim().toLowerCase())
 }
+
+export function isAdminRole(role: unknown): role is 'ADMIN' {
+  return role === 'ADMIN'
+}
