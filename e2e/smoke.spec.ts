@@ -4,6 +4,7 @@ const routes = [
   { path: '/', nome: 'página inicial' },
   { path: '/reportar', nome: 'formulário de reporte' },
   { path: '/animals/seed-luna', nome: 'perfil da Luna' },
+  { path: '/entrar', nome: 'página de entrada' },
 ]
 
 for (const { path, nome } of routes) {
