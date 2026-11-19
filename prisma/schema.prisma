@@ -82,6 +82,9 @@ model Sighting {
   description  String         @db.Text
   observedAt   DateTime       @default(now())
   status       SightingStatus @default(PENDING)
+  reviewedAt   DateTime?
+  reviewedById String?
+  reviewedBy   User?     @relation(fields: [reviewedById], references: [id], onDelete: SetNull)
 
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
@@ -100,6 +103,7 @@ model User {
   updatedAt     DateTime  @default(now()) @updatedAt
   sessions      Session[]
   accounts      Account[]
+  reviewedSightings Sighting[]
 
   @@map("user")
 }
