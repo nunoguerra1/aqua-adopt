@@ -23,3 +23,22 @@ export async function getPublicSightings(): Promise<PublicSighting[]> {
 
   return rows.map(toPublicSighting)
 }
+
+// Somente para /admin: inclui dados privados (nome, referência do local e posição exata).
+// Quem chama TEM que ter passado por requireAdmin().
+export async function getPendingSightingsForModeration() {
+  return prisma.sighting.findMany({
+    where: { status: 'PENDING' },
+    orderBy: { createdAt: 'desc' },
+    take: 100,
+  })
+}
+
+export async function countSightingsByStatus() {
+  const [PENDING, APPROVED, REJECTED] = await Promise.all([
+    prisma.sighting.count({ where: { status: 'PENDING' } }),
+    prisma.sighting.count({ where: { status: 'APPROVED' } }),
+    prisma.sighting.count({ where: { status: 'REJECTED' } }),
+  ])
+  return { PENDING, APPROVED, REJECTED }
+}
