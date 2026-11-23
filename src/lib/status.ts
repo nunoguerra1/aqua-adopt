@@ -23,3 +23,10 @@ export const STATUS_INFO: Record<Conservation, StatusInfo> = {
     classes: 'text-accent bg-accent/10 border-accent/20',
   },
 }
+
+export const CONSERVATION_STATUSES = [
+  'STABLE',
+  'VULNERABLE',
+  'ENDANGERED',
+  'CRITICAL',
+] as const satisfies readonly Conservation[]

@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { coordinate } from '@/lib/validation/coordinate'
 
 export const SPECIES_GROUPS = [
   'TURTLE',
@@ -16,14 +17,6 @@ const optionalText = (max: number) =>
     .max(max)
     .transform((value) => (value === '' ? undefined : value))
     .optional()
-
-const coordinate = (min: number, max: number) =>
-  z
-    .string()
-    .trim()
-    .min(1)
-    .transform((value) => Number(value.replace(',', '.')))
-    .refine((val) => !isNaN(val) && val >= min && val <= max)
 
 export const sightingSchema = z.object({
   reporterName: optionalText(80),

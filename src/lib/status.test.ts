@@ -1,6 +1,6 @@
 import { Conservation } from '@prisma/client'
 import { describe, expect, it } from 'vitest'
-import { STATUS_INFO } from './status'
+import { CONSERVATION_STATUSES, STATUS_INFO } from './status'
 
 describe('STATUS_INFO', () => {
   it('tem rótulo e classes para todo valor do enum Conservation', () => {
@@ -13,5 +13,9 @@ describe('STATUS_INFO', () => {
   it('usa rótulos distintos para cada status', () => {
     const rotulos = Object.values(STATUS_INFO).map((info) => info.label)
     expect(new Set(rotulos).size).toBe(rotulos.length)
+  })
+
+  it('lista todos os valores do enum em CONSERVATION_STATUSES', () => {
+    expect([...CONSERVATION_STATUSES].sort()).toEqual(Object.values(Conservation).sort())
   })
 })
